@@ -3,8 +3,8 @@ Kii.Render = {
     debug: function (display, palette) {//Basic I/O stuff
       let ctx = display.getContext('2d')
   
-      let x = Game.Mouse._x.toString()
-      let y = Game.Mouse._y.toString()
+      let x = Bootstrap.Mouse._x.toString()
+      let y = Bootstrap.Mouse._y.toString()
   
       ctx.fillStyle = palette['black']
       ctx.textBaseline = 'hanging'
@@ -14,7 +14,7 @@ Kii.Render = {
       let text = 'Mouse coordinates: ' + x + ', ' + y
       ctx.fillText(text,0,0)
   
-      text = 'LMB pressed: ' + Game.Mouse.Pressed['LMB'].toString()
+      text = 'LMB pressed: ' + Bootstrap.Mouse.Pressed['LMB'].toString()
       ctx.fillText(text,0,22)
   
       ctx.textAlign = 'center'

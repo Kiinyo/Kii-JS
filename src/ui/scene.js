@@ -14,7 +14,7 @@ Kii.Scene = function (template) {
     Kii.Entity.call(this, template)
     this.Flags = [false, false, false] //[Update, Render, Misc]
   
-    this.Game = Game
+    this.Bootstrap = Bootstrap
   
     this.enter = function (display) {
       console.log('Entering the ' + this._name + '.')
@@ -54,7 +54,7 @@ Kii.Scene = function (template) {
   }
 
 
-Game.Scenes = {
+Bootstrap.Scenes = {
     StartMenu: {
       name: "Default Start Menu",
       BackEnd: {
@@ -65,11 +65,11 @@ Game.Scenes = {
         },
         handleInput: function (scene, inputType, inputData, event) {
           if (inputType === 'keyup') {
-            let scenex = new Kii.Scene(Game.Scenes.Overworld)
-            Game.switchScene(scenex)
+            let scenex = new Kii.Scene(Bootstrap.Scenes.Overworld)
+            Bootstrap.switchScene(scenex)
           }
           if (inputType === 'mousemove') {
-            Game.Mouse.track(event)          
+            Bootstrap.Mouse.track(event)          
           }
         },
         update: function (arg) {
@@ -86,7 +86,7 @@ Game.Scenes = {
           Text: "Welcome to Kii " + Kii._version + "````Press [Any Key] to advance to an example Overworld Screen!",
           width: 40,
           height: 20,
-          Traits: [Kii.ZoneAbilities.TextBox]
+          Traits: [Bootstrap.ZoneAbilities.TextBox]
         }]
       }
     },
@@ -94,8 +94,8 @@ Game.Scenes = {
       name: "Testing Area",
       BackEnd: {
         init: function (arg) {
-          Game.Current.World = new Kii.World()
-          Game.Current.World.generateLine({_x: 1, _y: 4}, {_x: 4, _y: 4}, { //A wall
+          Bootstrap.Current.World = new Kii.World()
+          Bootstrap.Current.World.generateLine({_x: 1, _y: 4}, {_x: 4, _y: 4}, { //A wall
             name: 'Wall',
             type: 'Tile',
             glyph: '#',
@@ -103,7 +103,7 @@ Game.Scenes = {
             fgColor: 'white',
             Traits: [Kii.Traits.Tangible]
           })
-          Game.Current.World.init()        
+          Bootstrap.Current.World.init()        
         },
         term: function (arg) {
           //nothing yet
@@ -115,30 +115,30 @@ Game.Scenes = {
           scene.Flags[1] = true
           switch(inputType) {
             case 'mousemove':
-              Game.Mouse.track(event)
+              Bootstrap.Mouse.track(event)
               break
             case 'mousedown':
-              Game.Mouse.press(event)
+              Bootstrap.Mouse.press(event)
               break
             case 'mouseup':
-              Game.Mouse.release(event)
+              Bootstrap.Mouse.release(event)
               scene.Flags[0] = true
               break
             case 'keydown':
-              Game.Keyboard.press(inputData)
+              Bootstrap.Keyboard.press(inputData)
               break
             case 'keyup':
-              Game.Keyboard.release(inputData)
+              Bootstrap.Keyboard.release(inputData)
               scene.Flags[0] = true
               //console.log(inputData.keyCode)
-              if (inputData.keyCode == 37) {Game.Current.World.Player._x -= 1}
-              if (inputData.keyCode == 65) {Game.Current.World.scroll('W')}
-              if (inputData.keyCode == 39) {Game.Current.World.Player._x += 1}
-              if (inputData.keyCode == 68) {Game.Current.World.scroll('E')}
-              if (inputData.keyCode == 38) {Game.Current.World.Player._y -= 1}
-              if (inputData.keyCode == 87) {Game.Current.World.scroll('N')}
-              if (inputData.keyCode == 40) {Game.Current.World.Player._y += 1}
-              if (inputData.keyCode == 83) {Game.Current.World.scroll('S')}
+              if (inputData.keyCode == 37) {Bootstrap.Current.World.Player._x -= 1}
+              if (inputData.keyCode == 65) {Bootstrap.Current.World.scroll('W')}
+              if (inputData.keyCode == 39) {Bootstrap.Current.World.Player._x += 1}
+              if (inputData.keyCode == 68) {Bootstrap.Current.World.scroll('E')}
+              if (inputData.keyCode == 38) {Bootstrap.Current.World.Player._y -= 1}
+              if (inputData.keyCode == 87) {Bootstrap.Current.World.scroll('N')}
+              if (inputData.keyCode == 40) {Bootstrap.Current.World.Player._y += 1}
+              if (inputData.keyCode == 83) {Bootstrap.Current.World.scroll('S')}
               break
           }
         }

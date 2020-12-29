@@ -8,7 +8,7 @@ Kii.Zone = function (template) {
     Kii.Entity.call(this, template)
 }
 
-Kii.ZoneAbilities = {
+Bootstrap.ZoneAbilities = {
     SimpleCamera: {
         _name: 'Simple Camera',
         generate: function (template) {
@@ -23,8 +23,8 @@ Kii.ZoneAbilities = {
               }
         },
         update: function (scene, ui, input) {
-            let area = scene.Game.Current.World.ActiveArea.Tiles
-            let cursor = scene.Game.Current.World.Player
+            let area = scene.Bootstrap.Current.World.ActiveArea.Tiles
+            let cursor = scene.Bootstrap.Current.World.Player
             let cx = cursor._x
             let cy = cursor._y
             let r = cursor._radius
@@ -35,7 +35,7 @@ Kii.ZoneAbilities = {
             grid = Kii.Util.trimGrid(area, {_x: ox, _y: oy}, r)
 
             //Populate the tiles
-            let entities = scene.Game.Current.World.ActiveArea.Entities
+            let entities = scene.Bootstrap.Current.World.ActiveArea.Entities
             for (const e in entities) {
                 let ent = entities[e]
                 if (Kii.Util.findInsideBox({_x: ent._x, _y: ent._y}, 
