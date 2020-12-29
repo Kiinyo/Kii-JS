@@ -73,7 +73,7 @@ Kii.Util = {
       return newGrid
     },
     overwriteGrid: function (x, y, grid, grid2) {//Writes grid2 onto grid 1 at x, y
-      for (let h = 0; h + y < grid2.length; h++) {
+      for (let h = 0; h < grid2.length; h++) {
           if (y + h > -1 && y + h < grid.length) {
               for (let w = 0; w < grid2[h].length; w++) {
                   if (x + w > -1 && x + w < grid[(y + h)].length) {
@@ -98,7 +98,7 @@ Kii.Util = {
               newGrid.splice(0,(sY-rY))
           }
           //trim bottom
-          if (rY * 2 < newGrid.length) {
+          if (rY * 2 + 1 < newGrid.length) {
               newGrid.reverse()
               newGrid.splice(0, (newGrid.length - (rY * 2 + 1)))
               newGrid.reverse()
