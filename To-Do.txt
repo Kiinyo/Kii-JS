@@ -1,0 +1,12 @@
+Features
+    User Interface
+        Morrowind-style Dialog box
+
+        Inventory
+
+        Crafting
+            Alchemy
+            Butchery
+    
+    World
+        AI director

@@ -16,10 +16,10 @@ Kii.UI = function (template) {
             y: 0,
             width: 10,
             Text: "You can scroll this text by pressing A to see what else is written over here!!",
-            Traits: [Bootstrap.ZoneAbilities.TextBox]
+            Traits: [Game.ZoneAbilities.TextBox]
         },
         { //Camera
-            Traits: [Bootstrap.ZoneAbilities.SimpleCamera]
+            Traits: [Game.ZoneAbilities.SimpleCamera]
         }
     ]
     //Object the mouse is currently under
@@ -52,8 +52,8 @@ Kii.UI = function (template) {
     //Returns the 'pixel' the mouse is over
     this.updateMouse = function () {
         //Check if the mouse is inside the window
-        let mx = Bootstrap.Mouse._x
-        let my = Bootstrap.Mouse._y
+        let mx = Game.Mouse._x
+        let my = Game.Mouse._y
         let w = this.Format[0] + this.Format[1]
         let check = Kii.Util.findInsideBox({_x: mx, _y: my},
                                            {_x: this._x, _y: this._y,

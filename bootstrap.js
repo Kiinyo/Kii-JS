@@ -1,4 +1,4 @@
-var Bootstrap = {
+var Game = {
     _version: 'indev_0.001',
     Display: null,
     Scene: {_width: 800,
@@ -22,14 +22,14 @@ var Bootstrap = {
       this.Keyboard = new Kii.Keyboard(Kii.Keyboards.Default)
   
       let display = document.createElement("CANVAS")
-      display.width = Bootstrap.Scene._width
-      display.height = Bootstrap.Scene._height
+      display.width = Game.Scene._width
+      display.height = Game.Scene._height
   
   
       var bindKeyInputToScene = function (keyInput) {
         window.addEventListener(keyInput, function(e) {
-          if (Bootstrap.Current.Scene !== null) {
-            Bootstrap.Current.Scene.handleInput(keyInput, e)
+          if (Game.Current.Scene !== null) {
+            Game.Current.Scene.handleInput(keyInput, e)
           }
         })
       }
@@ -40,8 +40,8 @@ var Bootstrap = {
       var bindMouseInputToScene = function (mouseInput) {
         display.addEventListener(mouseInput, function(e) {
           e.preventDefault()
-          if (Bootstrap.Current.Scene !== null) {
-            Bootstrap.Current.Scene.handleInput(mouseInput, null, e)
+          if (Game.Current.Scene !== null) {
+            Game.Current.Scene.handleInput(mouseInput, null, e)
           }
         })
       }
@@ -61,7 +61,7 @@ var Bootstrap = {
   
       run: function() {
           this._interval = setInterval(function(){
-              Bootstrap.refresh();
+              Game.refresh();
           }, 1000 / this._fps);
       },
   
@@ -70,7 +70,7 @@ var Bootstrap = {
             this.Current.Scene.exit()
         }
       let ctx = this.Display.getContext('2d')
-        ctx.clearRect(0,0,Bootstrap.Scene._width,Bootstrap.Scene._height)
+        ctx.clearRect(0,0,Game.Scene._width,Game.Scene._height)
         this.Current.Scene = Scene
         if (this.Current.Scene !== null) {
             this.Current.Scene.enter(this.Display)
@@ -85,9 +85,9 @@ var Bootstrap = {
   }
   
   window.onload = function() {
-    Bootstrap.initialize()
-    document.body.appendChild(Bootstrap.Display)
-    let scene = new Kii.Scene(Bootstrap.Scenes.StartMenu)
-    Bootstrap.switchScene(scene)
-    Bootstrap.run()
+    Game.initialize()
+    document.body.appendChild(Game.Display)
+    let scene = new Kii.Scene(Game.Scenes.StartMenu)
+    Game.switchScene(scene)
+    Game.run()
   }

@@ -70,11 +70,23 @@ Kii.Entity = function (template) {
         }
       }
     },
+    Container: {//Any object that has a list of parts
+      _name: 'Container',
+      generate: function (template) {
+        this.Parts = template.Parts || []
+      },
+      addPart: function (part) {
+        this.Parts.push(part)
+      },
+      removePart: function (partIndex) {
+        this.Parts.splice(partIndex, 1)
+      }
+    },
     Player: {//The player character
       _name: 'Player',
       generate: function (template) {
         template = template || {}
-        this._radius = template.radius || 15 //Sight Radius
+        this._radius = template.radius || 3 //Sight Radius
         // I'm sure I should do something here....
       }
     }
