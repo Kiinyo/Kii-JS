@@ -84,12 +84,20 @@ Kii.Util = {
       }
       return grid
     },
+    copyGrid: function (grid) {
+        let newGrid = Kii.Util.generateGrid(grid[0].length, grid.length, function (x, y) {
+            let newTile = Object.assign({}, grid[y][x])
+            return newTile
+        })
+
+        return newGrid
+    },
     trimGrid: function (grid, source, radius) {
           let sX = source._x
           let sY = source._y
           //Let's trim the grid around the source while
           //also making sure that we respect the bounds of the grid
-          let newGrid = JSON.parse(JSON.stringify(grid))
+          let newGrid = Kii.Util.copyGrid(grid)
           let rY = radius._y || radius
           let rX = radius._x || radius
   
@@ -307,6 +315,40 @@ Kii.Util = {
   
   
           return finalFaceArray
+    },
+    parseDir: function (direction) { //Convert cardinal directions to [x, y]
+        switch (direction) {
+            case 'N':
+                direction = [0, -1]
+                break
+            case 'S':
+                direction = [0, 1]
+                break
+            case 'E':
+                direction = [1, 0]
+                break
+            case 'W':
+                direction = [-1, 0]
+                break
+            case 'NE':
+                direction = [1, -1]
+                break
+            case 'NW':
+                direction = [-1, -1]
+                break
+            case 'SE':
+                direction = [1, 1]
+                break
+            case 'SW':
+                direction = [-1, 1]
+                break
+        }
+        return direction
+    },
+    fPIA: function (something, area) { //Find position in area's grid
+      let x = something._x - area[0][0]._x
+      let y = something._y - area[0][0]._y
+      return [x, y]
     },
     //UI formatting
     textWrap: function (text, width) {

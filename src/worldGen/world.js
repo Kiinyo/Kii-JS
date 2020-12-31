@@ -221,10 +221,19 @@ Kii.World = function (template) {
       //Add the entities from the chunk
       let entities = []
       for (const entity of cChu.Entities) {
-        let ent = new Kii.Entity(entity)
+        let ent = null
+        switch (entity.type) {
+          case 'Fauna':
+            ent = new Game.Fauna(entity)
+            break
+          default:
+            ent = new Kii.Entity(entity)
+        }
   
         ent._x += origin.Global._x
         ent._y += origin.Global._y
+        let coords = Kii.Util.fPIA(ent, tiles)
+        tiles[coords[1]][coords[0]].enter(ent)
         //console.log(entity.x + "," + entity.y)
         entities.push(ent)
       }
@@ -348,6 +357,30 @@ Kii.World = function (template) {
     }
     //Currently loaded area
     this.ActiveArea = undefined
+    //Handling Entity movement throughout Area
+    this.isInsideArea = function (coords) {
+      return (this.ActiveArea.Tiles.length > coords[1] && 
+              this.ActiveArea.Tiles[0].length > coords[0] &&
+              coords[0] >= 0 && coords[1] >= 1)
+    }
+    this.checkCollision = function (something, direction) {
+      let coords = Kii.Util.fPIA(something, this.ActiveArea.Tiles)
+      coords[0] += direction[0]
+      coords[1] += direction[1]
+      if (this.isInsideArea(coords)) {
+            return [this.ActiveArea.Tiles[coords[1]][coords[0]]._passable, this.ActiveArea.Tiles[coords[1]][coords[0]]._occupant]
+      } else {
+        return false
+      }
+    },
+    this.leaveTile = function (entity) {
+      let coords = Kii.Util.fPIA(entity, this.ActiveArea.Tiles)
+      this.ActiveArea.Tiles[coords[1]][coords[0]].exit(entity)
+    },
+    this.enterTile = function (entity) {
+      let coords = Kii.Util.fPIA(entity, this.ActiveArea.Tiles)
+      return this.ActiveArea.Tiles[coords[1]][coords[0]].enter(entity)
+    },
     this.scroll = function (direction) {//Move the current loaded area in a direction and handle deloading
       let qx1 = performance.now()
       let newChunks = this.bufferChunks(this.ActiveArea.Origin, direction)
@@ -434,8 +467,13 @@ Kii.World = function (template) {
       Traits: [Kii.Traits.Tangible, Kii.Traits.Player]
     }
     this.init = function (args) {
-      this.Player = new Kii.Entity(this.Player) 
-      this.ActiveArea = this.generateArea(this.lookUp(this.Player._x, this.Player._y))
+      this.ActiveArea = this.generateArea(this.lookUp(this.Player.x, this.Player.y))
+      for (const e in this.ActiveArea.Entities) {
+        let ent = this.ActiveArea.Entities[e]
+        ent._standing = this.enterTile(ent)
+      }
+      this.Player = new Game.Fauna(this.Player)
+      this.Player._standing = this.enterTile(this.Player)
     }
   }
 

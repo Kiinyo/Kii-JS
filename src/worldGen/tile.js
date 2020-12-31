@@ -10,7 +10,8 @@ Kii.Tile = function (chunk, x, y, overwrite) {
           glyph: 'X',
           fgColor: 'white',
           bgColor: 'blue',
-          Traits: [Kii.Traits.Tangible]
+          passable: false,
+          Traits: [Kii.Traits.Tangible, Kii.Traits.Tile]
         }
         break
       case 'Void':
@@ -19,7 +20,8 @@ Kii.Tile = function (chunk, x, y, overwrite) {
           type: 'Tile',
           glyph: ' ',
           bgColor: 'red',
-          Traits: [Kii.Traits.Tangible]
+          passable: false,
+          Traits: [Kii.Traits.Tangible, Kii.Traits.Tile]
         }
         template.x = x
         template.y = y
@@ -30,7 +32,7 @@ Kii.Tile = function (chunk, x, y, overwrite) {
           type: 'Tile',
           glyph: '.',
           fgColor: 'green',
-          Traits: [Kii.Traits.Tangible]
+          Traits: [Kii.Traits.Tangible, Kii.Traits.Tile]
         }
         template.x = x
         template.y = y

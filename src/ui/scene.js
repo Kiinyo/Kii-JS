@@ -131,13 +131,13 @@ Game.Scenes = {
               Game.Keyboard.release(inputData)
               scene.Flags[0] = true
               //console.log(inputData.keyCode)
-              if (inputData.keyCode == 37) {Game.Current.World.Player._x -= 1}
+              if (inputData.keyCode == 37) {Game.Current.World.Player.move(Game.Current.World, 'W')}
               if (inputData.keyCode == 65) {Game.Current.World.scroll('W')}
-              if (inputData.keyCode == 39) {Game.Current.World.Player._x += 1}
+              if (inputData.keyCode == 39) {Game.Current.World.Player.move(Game.Current.World, 'E')}
               if (inputData.keyCode == 68) {Game.Current.World.scroll('E')}
-              if (inputData.keyCode == 38) {Game.Current.World.Player._y -= 1}
+              if (inputData.keyCode == 38) {Game.Current.World.Player.move(Game.Current.World, 'N')}
               if (inputData.keyCode == 87) {Game.Current.World.scroll('N')}
-              if (inputData.keyCode == 40) {Game.Current.World.Player._y += 1}
+              if (inputData.keyCode == 40) {Game.Current.World.Player.move(Game.Current.World, 'S')}
               if (inputData.keyCode == 83) {Game.Current.World.scroll('S')}
               break
           }

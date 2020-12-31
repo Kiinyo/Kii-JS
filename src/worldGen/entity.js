@@ -52,7 +52,7 @@ Kii.Entity = function (template) {
       },
       //A simple function to allow the Entity to be able to move in
       //basic directions assuming positive is right and down
-      move: function (direction, distance) {
+      translate: function (direction, distance) {
         distance = distance || 1
         switch (direction) {
           case 'left':
@@ -68,6 +68,31 @@ Kii.Entity = function (template) {
             this._y += distance
             break
         }
+      }
+    },
+    Tile: {
+      _name: 'Tile',
+      generate: function (template) {
+        this._passable = template.passable || true
+        this._occupant = template.occupant || null
+        this._contents = template.contents || []
+      },
+      //To-Do - Leaving tracks
+      enter: function (entity) {
+        this._occupant = entity
+        this._passable = false
+        return this
+      },
+      exit: function (entity) {
+        this._occupant = null
+        this._passable = true
+      },
+      give: function (index) {
+        let item = this._contents.splice(index, 1)
+        return item[0]
+      },
+      recieve: function (item) {
+        this._contents.push(item)
       }
     },
     Container: {//Any object that has a list of parts
