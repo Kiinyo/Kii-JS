@@ -1,0 +1,44 @@
+Alchemy System
+
+Step 1: Processing
+    Separate raw material into components
+ 
+    Actions required
+        Harvest //Flora
+        Butcher //Fauna
+ 
+Step 2: Isolating
+    Extract compounds from components
+ 
+    Actions required
+        Drain //Extract Liquids
+        Heat //Extract Solids
+        Distill //Extract Gasses
+ 
+Step 3: Catalysts
+    Isolate element from compound
+ 
+    Actions required
+        Acid    //Extract Element 1
+        Base    //Extract Element 2
+        Enzymes //Extract Element 3
+ 
+Step 4: Combination
+    Mix elements together
+ 
+    Actions required
+ 
+ 
+===============================================
+ 
+Ratios
+ 
+    1 Day = 200 Distance
+    1 Day = 20,000 Time
+        > 1 Distance = 100 Move
+            > 1 Move = ((Size / 2) / 100) kCal //Movement
+        > 1 Time = Size / 2,000 kCal
+ 
+    1 Distance = (Size / 2) kCal
+    1 Distance = 
+    1 Move = 1 Turn
