@@ -484,11 +484,20 @@ Kii.Util = {
         if (text.length > 0) {extra = text}
         return [pixels, extra]
     },
-    //Basic maths for ease of use
+    //Maths for ease of use
     floor: function (number) {//Floors negative numbers so that -1.1 becomes -1 and not -2
       return (Math.sign(number) * Math.floor(Math.abs(number)))
     },
     slope: function (x, y) {//Finds the slope of two coords
       return ((y._y - x._y) / (y._x - x._x))
+    },
+    stepDis: function (point, array) { //Stepped distribution
+        //Array [min, step1, step2, ..., max] length must be > 2
+        point -= 0.5
+        let sign = Math.sign(point)
+        point *= sign * 200
+        let index = Math.min(Math.floor(point / (100/ array.length)), array.length - 1)
+        return (array[index] * sign)
+
     }
   }
