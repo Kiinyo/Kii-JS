@@ -42,3 +42,13 @@ Ratios
     1 Distance = (Size / 2) kCal
     1 Distance = 
     1 Move = 1 Turn
+
+=================================================
+
+Biomes
+
+        Water   Coast        Saturated   Average     Dry
+
+Cold    Arctic, Glacier,     Taiga,      Tundra,     Ice
+Avg.    Seas,   Archipelago, Forest,     Grasslands, Mesa
+Warm    Ocean,  Corals,      Rainforest, Savannah,   Desert
