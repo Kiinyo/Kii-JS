@@ -223,9 +223,6 @@ Kii.World = function (template) {
       for (const entity of cChu.Entities) {
         let ent = null
         switch (entity.type) {
-          case 'Fauna':
-            ent = new Game.Fauna(entity)
-            break
           default:
             ent = new Kii.Entity(entity)
         }
@@ -472,7 +469,7 @@ Kii.World = function (template) {
         let ent = this.ActiveArea.Entities[e]
         ent._standing = this.enterTile(ent)
       }
-      this.Player = new Game.Fauna(this.Player)
+      this.Player = new Kii.Entity(this.Player)
       this.Player._standing = this.enterTile(this.Player)
     }
   }
