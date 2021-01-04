@@ -1,5 +1,5 @@
-Game.Faunas = {
-    WildAnimal: {
+Game.Fauna = {
+    Animal: {
       name: 'Wild Animal',
       desc: 'Try not to bother it!',
       type: 'Fauna',
@@ -9,6 +9,6 @@ Game.Faunas = {
   
       fgColor: 'yellow',
       glyph: 'W',
-      Traits: [Kii.Traits.Tangible]
+      traits: [Kii.Traits.Tangible]
     }
 }
