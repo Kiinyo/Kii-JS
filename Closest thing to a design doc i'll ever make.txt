@@ -45,10 +45,41 @@ Ratios
 
 =================================================
 
-Biomes
+Alchemy
 
-        Water   Coast        Saturated   Average     Dry
+    Apothecary //Compounds that affect the health of a target
+        Life Force // Your Health
+            Drain/Cure 1
+            Drain/Cure 2
+            Drain/Cure 3
+        Energy // Your SP / Awake Gauge 
+            Drain/Cure 1
+            Drain/Cure 2
+            Drain/Cure 3
+        Stamina // Your ability to perform short term intent tasks
+            Drain/Cure 1
+            Drain/Cure 2
+            Drain/Cure 3
+        Disease //Things contracted from the environment
+            Cure 1
+            Cure 2
+            Cure 3
+    Alteration //Compounds that change physical attributes
+        Bouyancy //Ability to float in different solids
+            Water
+            Air
+        Refraction //Affects the ability to percieve the object
+            Light
+            Darkness
+        Size //Affects the relative size of a target
+            Grow
+            Shrink
+    Reactions
+        Catalysts //Used to break down compounds into essence
+            Catalyst 1 //Acid
+            Catalyst 2 //Base
+            Catalyst 3 //Enzyme
 
-Cold    Arctic, Glacier,     Taiga,      Tundra,     Ice
-Avg.    Seas,   Archipelago, Forest,     Grasslands, Mesa
-Warm    Ocean,  Corals,      Rainforest, Savannah,   Desert
+    
+        
+    
