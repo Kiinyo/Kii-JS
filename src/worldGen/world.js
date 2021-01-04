@@ -210,9 +210,9 @@ Kii.World = function (template) {
       //of the chunk's 0,0 tile so that we can assign and x and y to tiles
       let tile = null
       let origin = this.getOrigin(coords, 'Chunk')
-      //Use the Kii.Util.generateGrid function to compactly generate all the tiles!
+      //Use the Kii.Util.generate2DGrid function to compactly generate all the tiles!
       let worldThis = this
-      let tiles = Kii.Util.generateGrid(cs, cs, function(x, y){
+      let tiles = Kii.Util.generate2DGrid(cs, cs, function(x, y){
         tile = worldThis.generateTile(cChu, origin.Tile._x + x, origin.Tile._y + y)
         tile._x = origin.Global._x + x
         tile._y = origin.Global._y + y

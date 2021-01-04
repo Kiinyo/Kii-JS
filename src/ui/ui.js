@@ -29,7 +29,7 @@ Kii.UI = function (template) {
     this.init = function (scene, display) {
         let placeholder = template.Filler || {}
         //Generate grid and fill it with Filler
-        this.Grid = Kii.Util.generateGrid(this._width, this._height, 
+        this.Grid = Kii.Util.generate2DGrid(this._width, this._height, 
             function (placeholder) {
                 let tile = new Kii.Entity(placeholder) 
                 return tile})

@@ -50,7 +50,7 @@ Game.ZoneAbilities = {
 
             let nullTemplate = this.nullTile
 
-            this.Grid = Kii.Util.generateGrid(this._width, this._height,
+            this.Grid = Kii.Util.generate2DGrid(this._width, this._height,
                 function (x,y) {
                     nullTemplate.x = x
                     nullTemplate.y = y

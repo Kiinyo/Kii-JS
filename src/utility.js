@@ -37,19 +37,27 @@ Kii.Util = {
         x = Math.floor(grid[0].length / 2) - Math.floor(grid2[0].length / 2) 
         return [x,y]
     },
-    generateGrid: function(width, height, action) {//Let's me create a grid and use an action to fill it
+    generate2DGrid: function(width, height, action, z) {//Let's me create a grid and use an action to fill it
+      z = z || null
       let point = null
       let grid = []
       let row = []
       for (let y = 0; y < height; y++) {
         row = []
         for (let x = 0; x < width; x++) {
-          point = action(x, y)
+          point = action(x, y, z)
           row.push(point)
         }
         grid.push(row)
       }
       return grid
+    },
+    generate3DGrid: function (width, height, depth, action) {//Creates a 3d grid because I'm not smart enough to make this an nDimensional grid creator
+        let Grid = []
+        for (let z = 0; z < depth; z++) {
+            Grid.push(this.generate2DGrid(width, height, action, z))
+        }
+        return Grid
     },
     untangleGrid: function (grid) {//Parses grid of grids into 1 big grid
       let newGrid = []
@@ -85,7 +93,7 @@ Kii.Util = {
       return grid
     },
     copyGrid: function (grid) {
-        let newGrid = Kii.Util.generateGrid(grid[0].length, grid.length, function (x, y) {
+        let newGrid = Kii.Util.generate2DGrid(grid[0].length, grid.length, function (x, y) {
             let newTile = Object.assign({}, grid[y][x])
             return newTile
         })
@@ -424,7 +432,7 @@ Kii.Util = {
   
       //Generate a grid with filler
       let filler = template.filler
-      let pixels = Kii.Util.generateGrid(width,height, function (x, y){ let tile = new Kii.Entity(filler); return tile})
+      let pixels = Kii.Util.generate2DGrid(width,height, function (x, y){ let tile = new Kii.Entity(filler); return tile})
   
       //Now draw the sides
       //Cycle through each y and replace the start and end with the border
