@@ -99,15 +99,16 @@ Kii.Entity = function (template) {
       _name: 'Player',
 
       generate: function (template) {
-        
+
         this._radius = template.radius || 3 //Sight Radius
 
         this._size = template.size || 200
     
-        this.avg = template.avg || [0.6, 0.25, 1, 1] //kHyd, bmi, lifeForce, energy
-        this._kHyd = template.size * this.avg[0] * 1000
-        this._fat = template.size * this.avg[1] * 3000
-        this._muscle = template.size * (1 - this.avg[1]) * 1000
+        this.avg = template.avg || [0.6, 0.25, 1, 1, 1] //kHyd, bmi, lifeForce, energy, stamina
+        this._kHyd = this._size * this.avg[0] * 1000
+        //In calories
+        this._fat = this._size * this.avg[1] * 3000
+        this._muscle = this._size * (1 - this.avg[1]) * 1000
     
         this._bmi = this.avg[1]
     
@@ -124,26 +125,35 @@ Kii.Entity = function (template) {
     
         this._setPoint = this._size //Where the body naturally wants to be
     
-        this._lifeForce = template.size / 10 * this.avg[2] //Restored through sleep
-        this._energy = template.size * 100 * this.avg[3] //Restored through sleep
+        this._lifeForce = this._size / 10 * this.avg[2] //Restored through sleep
+        this._energy = this._size * 100 * this.avg[3] //Restored through sleep
+        this._stamina = this._size / 2 *this.avg[4]
         this._standing = null //What it's currently standing on
       },
    
       exercise: function (time, multiplier) {
           time = time || 1
           multiplier = multiplier || 1
-  
-          this._bCal += (this._size / 200) * multiplier * time
+
+          let bCal = (this._size / 200) * multiplier * time
+          this._bCal += bCal
+          this._bladder += bCal / 4
           this._kHyd -= (this._size / 40) * multiplier * time
+          this._stamina -= (this._size / 200) * multiplier * time
       },
   
       wait: function (time, awake) {
           time = time || 1
           awake = awake || true
           //Water loss
-          this._kHyd -= this._size / 400 * time
+          let sHyd = this._size / 400 * time
+          this._kHyd -= sHyd
+          this._bladder += sHyd
+
           //Calorie loss
-          this._mCal += this._size / 200 * time
+          let mCal = this._size / 200 * time
+          this._mCal += mCal
+          this._bladder += mCal / 4
           //Digest food
           if (this.Stomach[1] > 0) {
               if (this.Stomach[1] > (this._size / 800)) {
@@ -156,7 +166,10 @@ Kii.Entity = function (template) {
               }
   
           }
+          //Just making sure to not expend energy if asleep
           if (awake) {this._energy -= (time * (this._size / 2400) * this.avg[3])}
+          //Restore stamina
+          this._stamina = Math.min(this._stamina + (this._size / 200) * time, this._size / 2 * this.avg[4])
   
       },
       
