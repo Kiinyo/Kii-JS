@@ -6,7 +6,18 @@ Kii.Chunk = function (region, coords) {//Where the chunk gets constructed
       template = {
         name: 'Default',
         entities: [
-          Game.Faunas.WildAnimal,
+          {
+            name: 'Wild Animal',
+            desc: 'Try not to bother it!',
+            type: 'Fauna',
+        
+            x: 2,
+            y: 0,
+        
+            fgColor: 'yellow',
+            glyph: 'W',
+            Traits: [Kii.Traits.Tangible]
+          },
           //Tree
           {
             name: 'Tree',
