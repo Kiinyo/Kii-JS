@@ -38,6 +38,7 @@ Game.Compendium = function (template) {
             }
         }
     }
+    //Format for location hash is Fert#t__#e__#h__
     this.findPage = function (hash) { //Looks up a page, returns null if there is nothing and writes to console
         if (this.Pages.has(hash)) {
             return this.Pages.get(hash)
