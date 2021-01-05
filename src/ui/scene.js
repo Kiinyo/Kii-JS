@@ -101,7 +101,7 @@ Game.Scenes = {
             glyph: '#',
             occlude: true,
             fgColor: 'white',
-            Traits: [Kii.Traits.Tangible]
+            Traits: [Kii.Traits.Tangible, Kii.Traits.Tile]
           })
           Game.Current.World.init()        
         },

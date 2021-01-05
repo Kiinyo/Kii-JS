@@ -178,20 +178,23 @@ Kii.Entity = function (template) {
           speed = speed || 1
           
           for (let s = 0; s < speed; s++) {
-              if (world.checkCollision(this, direction)[0]) {
-                  world.leaveTile(this)
-                  this._x += direction[0]
-                  this._y += direction[1]
-                  this._standing = world.enterTile(this)
-                  this.exercise(1, speed)
-              } else if (world.checkCollision(this, direction)[0] !== null) {
-                  //You've collided with something standing at the tile!
-                  //To-Do - Interactions with other Entities go here!
+            let tile = world.checkTile({_x: this._x + direction[0], 
+                                        _y: this._y + direction[1]})
+              if (tile !== null) {
+                //console.log(tile)
+                if (tile._passable) {
+                    world.leaveTile(this)
+                    this._x += direction[0]
+                    this._y += direction[1]
+                    this._standing = world.enterTile(this)
+                    this.exercise(1, speed)
+                } else {
+                  //Run collision handling
                   break
+                }
               } else {
-                  //Your journey comes to an end
-                  break
-              }  
+                break
+              }
           }
           this.wait(1)
       },
