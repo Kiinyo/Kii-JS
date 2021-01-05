@@ -513,16 +513,20 @@ Kii.Util = {
 KNG = { //Just a Rivest Cipher 4
     seed: 0,
     Permutations: [],
+    //Two indexes
     index1: 0,
     index2: 0,
+    //Helper function for the others
     swap: function () {
         let swapped = this.Permutations[this.index1]
         this.Permutations[this.index1] = this.Permutations[this.index2]
         this.Permutations[this.index2] = swapped
     },
+    //Generates the new permutations based on the seed
     init: function (seed) {
         this.Permutations = []
         this.seed = seed || this.seed
+        if (this.seed === 1) {this.seed++}
         for (this.index1 = 0; this.index1 < 100; this.index1++) {
             this.Permutations.push(this.index1)
         }
@@ -532,6 +536,22 @@ KNG = { //Just a Rivest Cipher 4
             this.swap()
         }
     },
+    //Returns a 'Random' Number without scrambling the Permutations
+    skip: function () {
+        this.index1 = (this.index1 + 1) % 0
+        return this.Permutations[this.index1] / 100
+    },
+    //Scrambles the permutations without returning a number
+    scramble: function (amount) {
+        let s = 0
+        while (s < amount) {
+            this.index1 = (this.index1 + 1) % 100
+            this.index2 = (this.index2 + this.Permutations[this.index1]) % 100
+            this.swap()
+            s++
+        }
+    },
+    //Returns a 'Random' Number and scrambles the Permutations
     output: function () {
         this.index1 = (this.index1 + 1) % 100
         this.index2 = (this.index2 + this.Permutations[this.index1]) % 100
