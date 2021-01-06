@@ -33,6 +33,64 @@ Kii.Entity = function (template) {
   }
   
   Kii.Traits = { //All entity 'Traits' or mixins
+    Atom: {
+      _name: 'Atom',
+      generate: function (template) {
+        this._size = template.size
+        //How it can be separated from compounds
+        this._catalyst = template.catalyst || 0 //Acid, Base, Enyzme
+        //How to identify it in the game
+        this._AtomID = template.AtomID || 100
+      },
+      fetchID: function () {
+        let hash = "Atom:" + this._AtomID.toString()
+        return hash
+      }
+    },
+    Molecule: {
+      _name: 'Molecule',
+      generate: function (template) {
+
+        this.Atoms = template.Atoms
+        let Atoms = [...template.Atoms]
+
+        //Where to look up the molecule on the compendium
+        this._MolID = []
+        for (const x in Atoms) {
+          this._MolID.push(Atoms[x])
+        }
+        this._MolID.sort()
+        this._MolID = this._MolID.join()
+
+        this._target = null
+        this._magnitude = null
+        this._variation = null
+      },
+      assignEffect: function (template) {
+        this._target = template.target || null
+        this._magnitude = template.magnitude || null
+        this._variant = template.variant || null
+      },
+      fetchID: function () {
+        let hash = 'Molecule:' + this._MolID
+        return hash
+      },
+      catalyze: function (catalyst) {
+        let atoms = []
+        let size = 0
+        for (const a in this.Atoms) {
+          let atom = this.Atoms[a]
+          if (atom._catalyst = catalyst._variation) {
+            atoms.push(atom)
+            size += atom._size
+          }
+        }
+        let ratio = size / catalyst.size
+        for (const i in atoms) {
+          atoms[i] *= ratio
+        }
+      }
+    },
     Tangible: { //Is something you can see
       _name: 'Tangible',
       //Generate is the generic function that Traits that want to
@@ -44,6 +102,8 @@ Kii.Entity = function (template) {
         this._occlude = template.occlude || false
         this._bgColor = template.bgColor || undefined
         this._stColor = template.stColor || undefined
+
+        this._size = template.size || 1
   
         this._toolTip = template.toolTip || undefined
         //This is the only nonstandard part, it tracks its original

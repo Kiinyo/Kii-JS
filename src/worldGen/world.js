@@ -469,7 +469,23 @@ Kii.World = function (template) {
         }
       //Compendium Generation
       this.Compendium = new Map()
+        //Establishing the biodiversity of the world
+        this._spd = template.spd || 0.50 //Species diversity - How varied populations are (Percentage of 300)
+        this._spr = template.spr || 0.80 //Species richness - How many Flora and Fauna exist (Percentage of 100)
+        this._spe = template.spe || 3.00 //Species eveness - How similar species are in number (Percentage populations can vary +/-)
         //Generate the Essences
+        let hash = ''
+        let trackers = [0,0,0,0] //Domain, Speciality, Attribute, Element Count
+        for (const d in Kii.Alchemy.Domains) {
+          hash = ''
+          let domain = Kii.Alchemy.Domains[d]
+          for (const s in domain) {
+            let speciality = domain[s]
+            //console.log(speciality)
+            trackers[1]++
+          }
+          trackers[0]++
+        }
 
         //Generate Herbiary
 

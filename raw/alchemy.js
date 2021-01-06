@@ -49,6 +49,14 @@ Kii.Alchemy = {
                 variation: 1,
                 reversable: true
             }
+        },
+        Chemistry: {
+            Catalyst: {
+                target: 'Catalyst',
+                magnitude: 1,
+                variation: 3,
+                reversable: false
+            }
         }
     }
 }
